@@ -7,17 +7,18 @@ export type ButtonBorder = "normal4" | "average40";
 
 interface ButtonProps extends ReactTagProps<"button"> {
   children: ReactNode;
+  className?: string;
   size?: ButtonSize;
   bg?: ButtonBg;
   border?: ButtonBorder;
 }
 
 const Button = (props: ButtonProps) => {
-  const { children, size, bg, border, ...otherProps } = props;
+  const { children, size, bg, border, className, ...otherProps } = props;
 
   return (
     <button
-      className={cva("btn-disabled w-full", {
+      className={cva(`btn-disabled w-full ${className}`, {
         defaultVariants: {
           bg: "blue",
           border: "normal4",
