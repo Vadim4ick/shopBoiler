@@ -1,0 +1,18 @@
+import { Meta, Title, IconGallery, IconItem } from "@storybook/blocks";
+import { Icon } from "./../ui/Icon/Icon.tsx";
+
+import { ICON_OPTIONS } from "./storybook";
+
+<Meta title="ui/iconography" />
+
+# Витрина иконок
+
+<IconGallery>
+  {Object.entries(ICON_OPTIONS).map(([iconName, iconComponent]) => (
+    <IconItem name={iconName} key={iconName}>
+      <Icon width={16} height={16}>
+        {iconComponent}
+      </Icon>
+    </IconItem>
+  ))}
+</IconGallery>

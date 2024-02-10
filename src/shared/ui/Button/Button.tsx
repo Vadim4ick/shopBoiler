@@ -5,7 +5,7 @@ export type ButtonSize = "normal40" | "small33" | "average48" | "auto";
 export type ButtonBg = "blue" | "yellow" | "clear" | "gray" | "pale";
 export type ButtonBorder = "normal4" | "average40";
 
-interface ButtonProps extends ReactTagProps<"button"> {
+export interface ButtonProps extends ReactTagProps<"button"> {
   children: ReactNode;
   className?: string;
   size?: ButtonSize;
@@ -33,7 +33,7 @@ const Button = (props: ButtonProps) => {
             yellow: "bg-yellow text-bigDarkGray",
           },
           border: {
-            average40: "rouded-[40px]",
+            average40: "rounded-[40px]",
             normal4: "rounded-[4px]",
           },
           size: {
