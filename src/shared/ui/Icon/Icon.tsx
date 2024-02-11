@@ -7,16 +7,12 @@ export interface IconProps extends ReactTagProps<"button"> {
   clicable?: boolean;
 }
 
-export const ICON_TEST_IDS = {
-  CONTAINER: "icon-container",
-};
-
 export const Icon = (props: IconProps) => {
-  const { children, clicable } = props;
+  const { children, clicable, ...otherProps } = props;
 
   if (clicable) {
     return (
-      <Button bg="clear" size="auto" width="auto">
+      <Button {...otherProps} bg="clear" size="auto" width="auto">
         {children}
       </Button>
     );

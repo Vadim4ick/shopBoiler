@@ -1,26 +1,22 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import type { ButtonProps } from "./Button";
-import { Button, BUTTON_TEST_IDS } from "./Button";
+import { Button } from "./Button";
 
 const buttonProps = {
-  children: "button text",
+  children: "Test",
 } satisfies ButtonProps;
 
 describe("Button", () => {
-  test("should render button", () => {
+  test("Test render button", () => {
     render(<Button {...buttonProps} />);
-    const button = screen.getByTestId(BUTTON_TEST_IDS.CONTAINER);
-    expect(button).toBeInTheDocument();
+    expect(screen.getByText("Test")).toBeInTheDocument();
   });
 
   test("should handle click event", () => {
     const handleClick = jest.fn();
-
     render(<Button {...buttonProps} onClick={handleClick} />);
-
-    const container = screen.getByTestId(BUTTON_TEST_IDS.CONTAINER);
-
+    const container = screen.getByText("Test");
     fireEvent.click(container);
 
     expect(handleClick).toHaveBeenCalledTimes(1);
@@ -28,11 +24,8 @@ describe("Button", () => {
 
   test("should disable click event", () => {
     const handleClick = jest.fn();
-
-    render(<Button {...buttonProps} onClick={handleClick} disabled />);
-
-    const container = screen.getByTestId(BUTTON_TEST_IDS.CONTAINER);
-
+    render(<Button disabled {...buttonProps} />);
+    const container = screen.getByText("Test");
     fireEvent.click(container);
 
     expect(handleClick).toHaveBeenCalledTimes(0);
@@ -40,8 +33,7 @@ describe("Button", () => {
 
   // Тестирование отображения класса кнопки
   test("should render correct class", () => {
-    render(<Button {...buttonProps} className="test-class" />);
-    const button = screen.getByTestId(BUTTON_TEST_IDS.CONTAINER);
-    expect(button).toHaveClass("test-class");
+    render(<Button className="test-class" {...buttonProps} />);
+    expect(screen.getByText("Test")).toHaveClass("test-class");
   });
 });

@@ -15,16 +15,11 @@ export interface ButtonProps extends ReactTagProps<"button"> {
   width?: ButtonWidth;
 }
 
-export const BUTTON_TEST_IDS = {
-  CONTAINER: "button-container",
-};
-
 const Button = (props: ButtonProps) => {
   const { children, size, bg, border, className, width, ...otherProps } = props;
 
   return (
     <button
-      data-testid={BUTTON_TEST_IDS.CONTAINER}
       className={cva(`btn-disabled ${className}`, {
         defaultVariants: {
           bg: "blue",

@@ -7,29 +7,27 @@ const iconProps = {
 } satisfies IconProps;
 
 describe("Icon", () => {
-  // test("should render icon", () => {
-  //   render(<Icon {...iconProps} />);
-  //   const button = screen.getByTestId(BUTTON_TEST_IDS.CONTAINER);
-  //   expect(button).toBeInTheDocument();
-  // });
-  //   test("should handle click event", () => {
-  //     const handleClick = jest.fn();
-  //     render(<Button {...iconProps} onClick={handleClick} />);
-  //     const container = screen.getByTestId(BUTTON_TEST_IDS.CONTAINER);
-  //     fireEvent.click(container);
-  //     expect(handleClick).toHaveBeenCalledTimes(1);
-  //   });
-  //   test("should disable click event", () => {
-  //     const handleClick = jest.fn();
-  //     render(<Button {...buttonProps} onClick={handleClick} disabled />);
-  //     const container = screen.getByTestId(BUTTON_TEST_IDS.CONTAINER);
-  //     fireEvent.click(container);
-  //     expect(handleClick).toHaveBeenCalledTimes(0);
-  //   });
-  //   // Тестирование отображения класса кнопки
-  //   test("should render correct class", () => {
-  //     render(<Button {...buttonProps} className="test-class" />);
-  //     const button = screen.getByTestId(BUTTON_TEST_IDS.CONTAINER);
-  //     expect(button).toHaveClass("test-class");
-  //   });
+  test("should render icon", () => {
+    const handleClick = jest.fn();
+
+    render(<Icon {...iconProps} onClick={handleClick} />);
+    const icon = screen.getByTestId("city-icon");
+
+    fireEvent.click(icon);
+
+    expect(icon).toBeInTheDocument();
+    expect(handleClick).not.toHaveBeenCalled();
+  });
+
+  test("should render icon clicable", () => {
+    const handleClick = jest.fn();
+
+    render(<Icon {...iconProps} clicable onClick={handleClick} />);
+    const button = screen.getByRole("button");
+
+    fireEvent.click(button);
+
+    expect(button).toBeInTheDocument();
+    expect(handleClick).toHaveBeenCalled();
+  });
 });

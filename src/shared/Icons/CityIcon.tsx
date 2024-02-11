@@ -1,5 +1,6 @@
 const CityIcon: React.FC<ReactTagProps<"svg">> = (props) => (
   <svg
+    data-testid="city-icon"
     fill="currentColor"
     height="12.000000"
     viewBox="0 0 12 12"
