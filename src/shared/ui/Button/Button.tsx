@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 export type ButtonSize = "normal40" | "small33" | "average48" | "auto";
 export type ButtonBg = "blue" | "yellow" | "clear" | "gray" | "pale";
 export type ButtonBorder = "normal4" | "average40";
+export type ButtonWidth = "full" | "auto";
 
 export interface ButtonProps extends ReactTagProps<"button"> {
   children: ReactNode;
@@ -11,18 +12,25 @@ export interface ButtonProps extends ReactTagProps<"button"> {
   size?: ButtonSize;
   bg?: ButtonBg;
   border?: ButtonBorder;
+  width?: ButtonWidth;
 }
 
+export const BUTTON_TEST_IDS = {
+  CONTAINER: "button-container",
+};
+
 const Button = (props: ButtonProps) => {
-  const { children, size, bg, border, className, ...otherProps } = props;
+  const { children, size, bg, border, className, width, ...otherProps } = props;
 
   return (
     <button
-      className={cva(`btn-disabled w-full ${className}`, {
+      data-testid={BUTTON_TEST_IDS.CONTAINER}
+      className={cva(`btn-disabled ${className}`, {
         defaultVariants: {
           bg: "blue",
           border: "normal4",
           size: "normal40",
+          width: "full",
         },
         variants: {
           bg: {
@@ -42,8 +50,13 @@ const Button = (props: ButtonProps) => {
             normal40: "h-[40px]",
             small33: "h-[33px]",
           },
+
+          width: {
+            auto: "w-auto",
+            full: "w-full",
+          },
         },
-      })({ bg, border, size })}
+      })({ bg, border, size, width })}
       {...otherProps}
     >
       {children}
