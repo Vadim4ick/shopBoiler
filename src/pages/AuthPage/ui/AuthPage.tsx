@@ -1,11 +1,41 @@
+"use client";
+
+import clsx from "clsx";
+import { motion } from "framer-motion";
+import { useState } from "react";
+
 import { Button } from "@/shared/ui/Button/Button";
 
 const PageAuth = () => {
-  console.log("!");
+  const [signIn, setSignIn] = useState(false);
 
   return (
-    <div className="bg-blue-500 flex justify-center rounded px-4 py-2 text-base text-white">
-      <Button>Test</Button>
+    <div className="relative h-screen w-full overflow-hidden bg-blue p-6">
+      <motion.div
+        animate={{ left: signIn ? "60%" : "0%" }}
+        initial={false}
+        transition={{ duration: 0.5 }}
+        className={clsx(
+          "absolute top-0 z-50 flex h-full w-[40%] items-center justify-center bg-green-500",
+        )}
+      >
+        <Button bg="yellow" onClick={() => setSignIn(!signIn)}>
+          Sign In
+        </Button>
+      </motion.div>
+
+      <motion.div
+        animate={{ left: signIn ? "15%" : "58%" }}
+        initial={false}
+        transition={{ duration: 0.5 }}
+        className={clsx(
+          "absolute top-0 flex h-full items-center justify-center p-6",
+        )}
+      >
+        <Button bg="yellow" onClick={() => setSignIn(!signIn)}>
+          Sign Up
+        </Button>
+      </motion.div>
     </div>
   );
 };

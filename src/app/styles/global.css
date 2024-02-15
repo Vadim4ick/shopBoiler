@@ -17,6 +17,10 @@ a {
   .btn-disabled {
     @apply disabled:pointer-events-none disabled:bg-gray disabled:text-darkGray;
   }
+
+  .title-1 {
+    @apply text-6xl font-medium;
+  }
 }
 
 @layer utilities {
