@@ -27,16 +27,16 @@ const modal = cva("modal", {
     //   appearence style according disigh
     appearance: {
         light:[
-            "bg-white",
+            "bg-slate-100",
             "text-gray-800",
-            "border-4",
+            "border-1",
             "border-red-400",
         ],
         dark:[
-            "bg-gray-400",
+            "bg-slate-600",
             "text-white",
-            "border-4",
-            "border-gray-400",
+            "border-1",
+            "bg-slate-800",
         ],
       }
     },
@@ -54,7 +54,7 @@ const modal = cva("modal", {
 }
 
 const Modal:React.FC<ModalProps> = (props: ModalProps ) => {
-    const {open ,children, className, position, size, ...otherProps } = props;
+    const {open ,children, className, position, size, appearance } = props;
     
     // do not render the modal if it's not open
     if (!open) {
@@ -62,11 +62,11 @@ const Modal:React.FC<ModalProps> = (props: ModalProps ) => {
     }
 
     return (
-        <div className={modal({ position, size, className })}>
+        <div className={modal({ position, appearance, size, className })}>
             {children}
         </div>
     );
 
   };
 
-export { Modal }
+export { Modal, type ModalProps };
