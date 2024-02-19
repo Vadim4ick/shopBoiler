@@ -18,6 +18,7 @@ export const ModalTop: Story  = {
     args: {
        children: "Modal content should appear where",
        open: true,
+       onClose: () => {},
    },
 };
 
