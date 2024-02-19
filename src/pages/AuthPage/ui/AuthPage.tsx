@@ -1,35 +1,38 @@
 "use client";
 
-import clsx from "clsx";
-import { motion } from "framer-motion";
+// import clsx from "clsx";
+// import { motion } from "framer-motion";
 import { useState } from "react";
 
 import { Button } from "@/shared/ui/Button/Button";
 import { Modal } from "@/shared/ui/Modal/Modal";
 
 const PageAuth = () => {
-  const [signIn, setSignIn] = useState(false);
+  // const [signIn, setSignIn] = useState(false);
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleClick = () => {
     setShowModal(true);
-};
+  };
 
   const handleClose = () => {
     setShowModal(false);
-};
+  };
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-blue p-6">
-
-
-        <div>
-            <Button children={"Open modal"} onClick={handleClick} />
-            <Modal position={"left"} open={showModal} children={"Some content of modal"} onClose={handleClose} />
-        </div>
-
-
+      <div>
+        <Button onClick={handleClick}>Open modal</Button>
+        <Modal
+          close={<>Test</>}
+          open={showModal}
+          position="left"
+          onClose={handleClose}
+        >
+          Some content of modal
+        </Modal>
+      </div>
 
       {/* <motion.div
         animate={{ left: signIn ? "60%" : "0%" }}
