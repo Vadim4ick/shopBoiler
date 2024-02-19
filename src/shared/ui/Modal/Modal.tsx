@@ -1,82 +1,72 @@
-import React from 'react'
+import { ReactNode, useState } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
+const modal = cva("modal", {
+    variants: {
+        // position on page
+        position: {
+        top: [
+            "absolute ",
+            "max-w-fit",
+            "top-0",
+            "right-0",
+            
+        ],
+        left: [
+            "absolute ",
+            "max-w-fit",
+            "inset-y-0",
+            "left-0",
+        ],
+      },
+      // size for different screen width
+      size: {
+        small: ["text-sm", "py-1", "px-2"],
+        medium: ["text-base", "py-2", "px-4"],
+      },
+    //   appearence style according disigh
+    appearance: {
+        light:[
+            "bg-white",
+            "text-gray-800",
+            "border-4",
+            "border-red-400",
+        ],
+        dark:[
+            "bg-gray-400",
+            "text-white",
+            "border-4",
+            "border-gray-400",
+        ],
+      }
+    },
+    defaultVariants: { 
+        position: "top", 
+        size: "medium", 
+        appearance: "light" 
+    },    
+  });
 
-interface ModalCommonProps { }
-
-export interface ModalProps extends ModalCommonProps {
-    /** Whether the modal dialog is visible or not */
-    open?: boolean;
-    /** The modal dialog's title */
-    title?: React.ReactNode;
-    /** Whether a close (x) button is visible on top right of the modal dialog or not. Recommend to use closeIcon instead. */
-    closable?: boolean;
-    /** Specify a function that will be called when a user clicks the OK button */
-    onOk?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    /** Specify a function that will be called when a user clicks mask, close button on top right or Cancel button */
-    onCancel?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    /** Centered Modal */
-    centered?: boolean;
-    /** Width of the modal dialog */
-    width?: string | number;
-    /** Text of the OK button */
-    okText?: React.ReactNode;
-    /** Text of the Cancel button */
-    cancelText?: React.ReactNode;
-    style?: React.CSSProperties;
-    className?: string;
-    zIndex?: number;
-    bodyStyle?: React.CSSProperties;
-    closeIcon?: React.ReactNode;
-    children?: React.ReactNode;
+  interface ModalProps extends React.HTMLAttributes<HTMLDivElement>,VariantProps<typeof modal> {
+    // аdditional properties that you want to add to the element <div>
+    children: ReactNode;
+    open: boolean;
 }
 
-const Modal: React.FC<ModalProps> = (props) => {
-    const {
-        open,
-        title,
-        closable,
-        onOk,
-        onCancel,
-        centered,
-        okText,
-        cancelText,
-        style,
-        className,
-        zIndex,
-        bodyStyle,
-        closeIcon,
-        children,
-        width = 520,
-        ...otherProps
-    } = props;
-
-    const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
-        const { onCancel } = props;
-        onCancel?.(e);
-    };
-
-    const handleOk = (e: React.MouseEvent<HTMLButtonElement>) => {
-        const { onOk } = props;
-        onOk?.(e);
-    };
-
+const Modal:React.FC<ModalProps> = (props: ModalProps ) => {
+    const {open ,children, className, position, size, ...otherProps } = props;
+    
+    // do not render the modal if it's not open
     if (!open) {
-        return null; // Do not render the modal if it's not open
+        return null; 
     }
 
     return (
-        <div className={`modal ${centered ? 'centered' : ''} ${className}`} style={{ width, zIndex, ...style }}>
-            <div className="modal-content" style={bodyStyle}>
-                {closable && closeIcon}
-                {title && <div className="modal-title">{title}</div>}
-                <div className="modal-body">{children}</div>
-                <div className="modal-footer">
-                    <button onClick={onOk}>{okText || 'OK'}</button>
-                    <button onClick={onCancel}>{cancelText || 'Cancel'}</button>
-                </div>
-            </div>
+        <div className={modal({ position, size, className })}>
+            {children}
         </div>
-    )
-}
+    );
+
+  };
 
 export { Modal }
